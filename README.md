@@ -124,25 +124,40 @@ trả mã thoát 1 nếu có ca không đạt.
 
 ## 8. Chạy khảo sát
 
+Từ thư mục gốc của dự án, chạy:
+
 ```powershell
 python khao_sat.py
 ```
 
-Khảo sát hai dạng đồ thị với n = 5, 10, 20:
-- Đường đi: n - 1 cạnh, mỗi cạnh trọng số 1.
-- Đầy đủ: cạnh nối hai đỉnh liên tiếp có trọng số 1;
-  các cạnh còn lại có trọng số 10.
+Chương trình khảo sát hai dạng đồ thị với `n = 5, 10, 20`:
 
-Cả hai dạng đều có tổng trọng số MST kỳ vọng bằng n - 1.
+- **Đồ thị đường đi:** gồm `n - 1` cạnh, mỗi cạnh có trọng số 1.
+- **Đồ thị đầy đủ:** các cạnh nối hai đỉnh liên tiếp có trọng số 1, các cạnh còn lại có trọng số 10.
 
-Các bộ đếm:
-- day_canh: số cạnh đẩy vào heap, không tính phần tử nguồn.
-- lay_canh: số cạnh lấy khỏi heap, kể cả cạnh bị bỏ qua.
-- lay_heap: số lần lấy khỏi heap, có tính phần tử nguồn.
-- nhan_dinh: số đỉnh được nhận.
-- bo_qua: số phần tử bị bỏ qua vì đỉnh đã được nhận.
+Ở cả hai dạng, `n - 1` cạnh nối các đỉnh liên tiếp tạo thành một cây bao trùm có tổng trọng số `n - 1`. Vì mỗi cạnh có trọng số ít nhất là 1, đây cũng là tổng trọng số MST kỳ vọng.
+
+Các bộ đếm trong kết quả khảo sát:
+
+- `day_canh`: số cạnh được đẩy vào heap, không tính phần tử nguồn.
+- `lay_canh`: số cạnh được lấy khỏi heap, kể cả cạnh bị bỏ qua.
+- `lay_heap`: số lần lấy phần tử khỏi heap, tính cả phần tử nguồn.
+- `nhan_dinh`: số đỉnh được nhận vào cây.
+- `bo_qua`: số phần tử bị bỏ qua vì đỉnh đích đã được nhận.
 
 Phiên bản hiện tại xử lý đến khi heap rỗng.
+
+### Chạy mô phỏng trực quan thuật toán Prim
+
+Từ thư mục gốc của dự án, chạy:
+
+```powershell
+python mo_phong.py
+```
+
+Chọn một đồ thị mẫu hoặc bấm **Sửa đồ thị…** để nhập đồ thị. Mỗi dòng trong danh sách cạnh gồm ba số nguyên theo thứ tự `u v w`, trong đó `u`, `v` là hai đầu mút và `w` là trọng số cạnh.
+
+Bấm **Tiếp** để theo dõi từng bước hoặc **Chạy** để chương trình chạy tự động. Hai tab **Heap trước** và **Heap sau** cho phép đối chiếu các ứng viên trước và sau bước đang xét. Tab **Cạnh cây** liệt kê các cạnh đã chọn.
 
 ## 9. Độ phức tạp
 
