@@ -29,7 +29,7 @@ def them_ung_vien(hang, u, ke, da_chon):
     return so_day
 
 
-def prim(ke, s=1, lan_vet=False, thong_ke=None):
+def prim(ke, s=1, lan_vet=False, thong_ke=None, ghi_buoc=None):
     """
     Trả về (canh_chon, tong), hoặc None nếu không liên thông.
 
@@ -57,6 +57,13 @@ def prim(ke, s=1, lan_vet=False, thong_ke=None):
     canh_chon = []
     tong = 0
 
+    def ghi(trang_thai, phan_tu):
+        if ghi_buoc is not None:
+            ghi_buoc(trang_thai, phan_tu, tuple(sorted(hang)),
+                     tuple(v for v in range(1, n + 1) if da_chon[v]),
+                     tuple(canh_chon), tong)
+
+    ghi("Bắt đầu", None)
     while hang:
         w, u, cha = heappop(hang)
         dem["lay_heap"] += 1
@@ -77,6 +84,7 @@ def prim(ke, s=1, lan_vet=False, thong_ke=None):
             if lan_vet:
                 print(f"Bo qua: dinh {u} da nam trong cay.")
 
+            ghi("Bỏ qua", (w, u, cha))
             continue
 
         da_chon[u] = True
@@ -95,6 +103,7 @@ def prim(ke, s=1, lan_vet=False, thong_ke=None):
             hang, u, ke, da_chon
         )
 
+        ghi("Nhận đỉnh", (w, u, cha))
         if lan_vet:
             tap_dinh = [
                 v for v in range(1, n + 1) if da_chon[v]
